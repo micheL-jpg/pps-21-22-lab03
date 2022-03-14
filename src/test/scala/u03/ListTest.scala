@@ -3,6 +3,7 @@ package u03
 import org.junit.*
 import org.junit.Assert.*
 import Lists.*
+import u02.Optionals.Option.*
 
 class ListTest:
   import List.*
@@ -44,3 +45,8 @@ class ListTest:
   @Test def testFlatMap(): Unit =
     assertEquals(Cons (11 , Cons (21 , Cons (31 , Nil ()))),
       flatMap(l)(v => Cons (v + 1, Nil ())))
+
+  @Test def maxTest(): Unit =
+    assertEquals(Some(30), max(l))
+    assertEquals(None(), max (Nil ()))
+    assertEquals(Some(25), max ( Cons (10 , Cons (25 , Cons (20 , Nil ())))))

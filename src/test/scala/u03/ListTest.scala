@@ -32,3 +32,7 @@ class ListTest:
     assertEquals(Cons (10 , Cons (20 , Cons (30 , Cons (40 , Nil ())))),
       append(l, tail))
     assertEquals(tail, append(Nil(), tail))
+
+  @Test def testFlatMap(): Unit =
+    assertEquals(Cons (11 , Cons (21 , Cons (31 , Nil ()))),
+      flatMap(l)(v => Cons (v + 1, Nil ())))

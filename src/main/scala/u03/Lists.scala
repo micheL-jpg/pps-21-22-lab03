@@ -30,10 +30,14 @@ object Lists extends App:
       case Cons(head, tail) if n == 1 => tail
       case Cons(head, tail) if n > 0 => drop(tail, n-1)
       case _ => Nil()
-      
+
     def append[A](left: List[A], right: List[A]): List[A] = left match
-      case List.Cons(head, tail) => Cons(head, append(tail, right))
+      case Cons(head, tail) => Cons(head, append(tail, right))
       case Nil() => right
+
+    def flatMap[A, B](l: List[A])(f: A => List[B]): List[B] = l match
+      case Cons(head, tail) => append(f(head), flatMap(tail)(f))
+      case Nil() => Nil()
 
   val l = List.Cons(10, List.Cons(20, List.Cons(30, List.Nil())))
   println(List.sum(l)) // 60

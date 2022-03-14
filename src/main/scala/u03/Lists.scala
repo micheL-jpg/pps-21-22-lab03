@@ -18,11 +18,20 @@ object Lists extends App:
     def map[A, B](l: List[A])(mapper: A => B): List[B] = l match
       case Cons(h, t) => Cons(mapper(h), map(t)(mapper))
       case Nil() => Nil()
+      
+    def mapFlat[A, B](l: List[A])(mapper: A => B): List[B] =
+      flatMap(l)(v => Cons(mapper(v), Nil()))
 
     def filter[A](l1: List[A])(pred: A => Boolean): List[A] = l1 match
       case Cons(h, t) if pred(h) => Cons(h, filter(t)(pred))
       case Cons(_, t) => filter(t)(pred)
       case Nil() => Nil()
+
+    def filterFlat[A](l1: List[A])(pred: A => Boolean): List[A] =
+      flatMap(l1)(h => pred(h) match {
+        case true => Cons(h, Nil())
+        case false => Nil()
+      })
 
     @tailrec
     def drop[A](l: List[A], n: Int): List[A] = l match
@@ -30,11 +39,11 @@ object Lists extends App:
       case Cons(head, tail) if n == 1 => tail
       case Cons(head, tail) if n > 0 => drop(tail, n-1)
       case _ => Nil()
-
+      
     def append[A](left: List[A], right: List[A]): List[A] = left match
       case Cons(head, tail) => Cons(head, append(tail, right))
       case Nil() => right
-
+      
     def flatMap[A, B](l: List[A])(f: A => List[B]): List[B] = l match
       case Cons(head, tail) => append(f(head), flatMap(tail)(f))
       case Nil() => Nil()

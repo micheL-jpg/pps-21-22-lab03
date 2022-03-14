@@ -17,9 +17,17 @@ class ListTest:
     assertEquals(Cons(11, Cons(21, Cons(31, Nil()))), map(l)(_ + 1))
     assertEquals(Cons("10", Cons("20", Cons("30", Nil()))), map(l)(_ + ""))
 
+  @Test def testMapFlat(): Unit =
+    assertEquals(Cons(11, Cons(21, Cons(31, Nil()))), mapFlat(l)(_ + 1))
+    assertEquals(Cons("10", Cons("20", Cons("30", Nil()))), mapFlat(l)(_ + ""))
+
   @Test def testFilter() =
     assertEquals(Cons(20, Cons(30, Nil())), filter(l)(_ >= 20))
     assertEquals(Cons(10, Cons(30, Nil())), filter(l)(_ != 20))
+
+  @Test def testFilterFlat(): Unit =
+    assertEquals(Cons(20, Cons(30, Nil())), filterFlat(l)(_ >= 20))
+    assertEquals(Cons(10, Cons(30, Nil())), filterFlat(l)(_ != 20))
 
   @Test def testDrop(): Unit =
     assertEquals(Cons (20 , Cons (30 , Nil ())), drop(l, 1))

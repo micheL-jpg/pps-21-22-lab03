@@ -3,6 +3,7 @@ package u03
 import org.junit.*
 import org.junit.Assert.*
 import Lists.*
+import u02.Modules.Person.*
 import u02.Optionals.Option.*
 
 class ListTest:
@@ -50,3 +51,10 @@ class ListTest:
     assertEquals(Some(30), max(l))
     assertEquals(None(), max (Nil ()))
     assertEquals(Some(25), max ( Cons (10 , Cons (25 , Cons (20 , Nil ())))))
+
+  @Test def testCourses(): Unit =
+    val list = Cons(Teacher("Viroli", "pps"), Cons(Teacher("Ricci", "pcd"),
+      Cons(Student("Bachetti", 1998), Nil())))
+    assertEquals(Cons("pps", Cons("pcd", Nil())), getCourses(list))
+    val list2 = drop(list, 2)
+    assertEquals(Nil(), getCourses(list2))

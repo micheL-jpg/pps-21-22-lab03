@@ -1,5 +1,8 @@
 package u03
 
+import u02.Modules.Person
+import u02.Modules.Person.*
+
 import scala.annotation.tailrec
 import u02.Optionals.Option
 import u02.Optionals.Option.*
@@ -60,6 +63,12 @@ object Lists extends App:
         case _ => m
         
       _max(l, None())
+      
+    def getCourses(l: List[Person]): List[String] =
+      flatMap(l)(v => v match
+        case Student(_, _) => Nil()
+        case Teacher(_, c) => Cons(c, Nil())
+      )
 
   val l = List.Cons(10, List.Cons(20, List.Cons(30, List.Nil())))
   println(List.sum(l)) // 60

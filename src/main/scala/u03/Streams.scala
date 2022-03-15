@@ -41,6 +41,7 @@ object Streams extends App:
 
     @tailrec
     def drop[A](stream: Stream[A])(n: Int): Stream[A] = (stream, n) match
+      case (Cons(head, tail), n) if n == 0 => stream
       case (Cons(head, tail), n) if n > 1 => drop(tail())(n-1)
       case (Cons(head, tail), n) => tail()
       case _ => Empty()

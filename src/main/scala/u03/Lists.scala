@@ -41,9 +41,9 @@ object Lists extends App:
 
     @tailrec
     def drop[A](l: List[A], n: Int): List[A] = l match
-      case Cons(head, tail) if n == 0 => Cons(head, tail)
-      case Cons(head, tail) if n == 1 => tail
-      case Cons(head, tail) if n > 0 => drop(tail, n-1)
+      case Cons(head, tail) if n == 0 => l
+      case Cons(head, tail) if n > 1 => drop(tail, n-1)
+      case Cons(head, tail) => tail
       case _ => Nil()
 
     def append[A](left: List[A], right: List[A]): List[A] = left match
@@ -63,7 +63,7 @@ object Lists extends App:
         case _ => m
         
       _max(l, None())
-      
+
     def getCourses(l: List[Person]): List[String] =
       flatMap(l)(v => v match
         case Student(_, _) => Nil()

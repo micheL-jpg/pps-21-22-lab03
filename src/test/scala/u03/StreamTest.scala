@@ -15,3 +15,4 @@ class StreamTest:
       Stream.toList(Stream.drop(s)(6)))
     assertEquals(Stream.empty(), Stream.drop(s)(10))
     assertEquals(Stream.empty(), Stream.drop(Stream.empty())(10))
+    assertEquals(s, Stream.drop(s)(0))

@@ -1,5 +1,7 @@
 package u03
 
+import scala.annotation.tailrec
+
 object Streams extends App:
 
   import Lists.*
@@ -37,7 +39,12 @@ object Streams extends App:
     def iterate[A](init: => A)(next: A => A): Stream[A] =
       cons(init, iterate(next(init))(next))
 
-  // TODO: def drop(....)
+    @tailrec
+    def drop[A](stream: Stream[A])(n: Int): Stream[A] = (stream, n) match
+      case (Cons(head, tail), n) if n > 1 => drop(tail())(n-1)
+      case (Cons(head, tail), n) => tail()
+      case _ => Empty()
+
   end Stream
 
   // var simplifies chaining of functions a bit..

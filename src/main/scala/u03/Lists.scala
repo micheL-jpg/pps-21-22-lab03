@@ -75,6 +75,10 @@ object Lists extends App:
       case Cons(head, tail) => foldLeft(tail)(f(start, head))(f)
       case Nil() => start
 
+    def foldRight[A, B](l: List[A])(start: B)(f: (A, B) => B): B = l match
+      case Cons(head, tail) => f(head, foldRight(tail)(start)(f))
+      case Nil() => start
+      
   end List
 
   val l = List.Cons(10, List.Cons(20, List.Cons(30, List.Nil())))

@@ -69,3 +69,15 @@ class ListTest:
   @Test def testFoldLeftString(): Unit =
     val lst = Cons("c", Cons("i", Cons("a", Cons("o", Nil()))))
     assertEquals("ciao", foldLeft(lst)("")(_ concat _))
+
+
+  @Test def testFoldRightInt(): Unit =
+    val lst = Cons(3, Cons(7, Cons(1, Cons(5, Nil()))))
+    assertEquals(-8, foldRight(lst)(0)(_ - _))
+    assertEquals(16, foldLeft(lst)(0)(_ + _))
+    assertEquals(105, foldLeft(lst)(1)(_ * _))
+    assertEquals(0, foldLeft(Nil[Int]())(0)(_ + _))
+
+  @Test def testFoldRightString(): Unit =
+    val lst = Cons("c", Cons("i", Cons("a", Cons("o", Nil()))))
+    assertEquals("ciao", foldLeft(lst)("")(_ concat _))

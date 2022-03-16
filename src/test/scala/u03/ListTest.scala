@@ -58,3 +58,14 @@ class ListTest:
     assertEquals(Cons("pps", Cons("pcd", Nil())), getCourses(list))
     val list2 = drop(list, 2)
     assertEquals(Nil(), getCourses(list2))
+
+  @Test def testFoldLeftInt(): Unit =
+    val lst = Cons(3, Cons(7, Cons(1, Cons(5, Nil()))))
+    assertEquals(-16, foldLeft(lst)(0)(_ - _))
+    assertEquals(16, foldLeft(lst)(0)(_ + _))
+    assertEquals(105, foldLeft(lst)(1)(_ * _))
+    assertEquals(0, foldLeft(Nil[Int]())(0)(_ + _))
+
+  @Test def testFoldLeftString(): Unit =
+    val lst = Cons("c", Cons("i", Cons("a", Cons("o", Nil()))))
+    assertEquals("ciao", foldLeft(lst)("")(_ concat _))

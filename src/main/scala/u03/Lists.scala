@@ -70,6 +70,13 @@ object Lists extends App:
         case Teacher(_, c) => Cons(c, Nil())
       )
 
+    @tailrec
+    def foldLeft[A, B](l: List[A])(start: B)(f: (B, A) => B): B = l match
+      case Cons(head, tail) => foldLeft(tail)(f(start, head))(f)
+      case Nil() => start
+
+  end List
+
   val l = List.Cons(10, List.Cons(20, List.Cons(30, List.Nil())))
   println(List.sum(l)) // 60
 

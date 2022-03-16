@@ -70,7 +70,6 @@ class ListTest:
     val lst = Cons("c", Cons("i", Cons("a", Cons("o", Nil()))))
     assertEquals("ciao", foldLeft(lst)("")(_ concat _))
 
-
   @Test def testFoldRightInt(): Unit =
     val lst = Cons(3, Cons(7, Cons(1, Cons(5, Nil()))))
     assertEquals(-8, foldRight(lst)(0)(_ - _))
